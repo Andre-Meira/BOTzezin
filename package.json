@@ -1,0 +1,29 @@
+{
+  "name": "BOTzezin",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Andre-Meira/BOTzezin.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Andre-Meira/BOTzezin/issues"
+  },
+  "homepage": "https://github.com/Andre-Meira/BOTzezin#readme",
+  "dependencies": {
+    "discord.js": "^12.2.0",
+    "request": "^2.88.2",
+    "request-promise": "^4.2.5",
+    "request-promise-native": "^1.0.8"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
