@@ -22,9 +22,9 @@ Client.on("message",(msg) =>{
         
        if(msg.content.startsWith("-BOTeu")){
             ApiController.index();
-        } 
+        }
     }
 })
 
 
-Client.login("NzMwODYyNTAxMDQyMDYxMzY0.XwjtXg.gfd3cU_z3DeIvZMApx7XuMtQF7U")
+Client.login("TOKEN DISCORD")
