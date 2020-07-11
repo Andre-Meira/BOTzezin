@@ -1,5 +1,6 @@
 const Discord = require("discord.js");
 const Client = new Discord.Client();
+const keyAPIlol = "Key API"
 
 const ApiController = require('./Controllers/Api');
 
@@ -21,10 +22,12 @@ Client.on("message",(msg) =>{
         console.log(`Servidor:"${msg.guild.name}": Usuario:"${msg.author.username}": Diz:"${msg.content}"`)
         
        if(msg.content.startsWith("-BOTeu")){
-            ApiController.index();
+            const idUser = ApiController.getUserId("LENILSON SCANIA",keyAPIlol);    
+            ApiController.getElo(idUser,keyAPIlol).then(infoUser => msg.reply
+            (`${infoUser.summonerName} Seu elo ${infoUser.tier} ${infoUser.rank}`))
         }
     }
 })
 
 
-Client.login("TOKEN DISCORD")
+Client.login("TOKEN BOT")
