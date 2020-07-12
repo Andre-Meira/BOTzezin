@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 const Client = new Discord.Client();
-const keyAPIlol = "Key API"
+const keyAPIlol = "RGAPI-1a296f7c-d5b5-47a5-b76d-4c30a87b6d6b"
 
 const ApiController = require('./Controllers/Api');
 
@@ -21,13 +21,23 @@ Client.on("message",(msg) =>{
         
         console.log(`Servidor:"${msg.guild.name}": Usuario:"${msg.author.username}": Diz:"${msg.content}"`)
         
-       if(msg.content.startsWith("-BOTeu")){
-            const idUser = ApiController.getUserId("LENILSON SCANIA",keyAPIlol);    
-            ApiController.getElo(idUser,keyAPIlol).then(infoUser => msg.reply
-            (`${infoUser.summonerName} Seu elo ${infoUser.tier} ${infoUser.rank}`))
+       if(msg.content.startsWith("-EuLOL")){
+            const nameUser = msg.content.split("-EuLOL");
+            const nomeLOL = 1;
+            
+            if(nameUser[nomeLOL]){
+                const idUser = ApiController.getUserId(nameUser[nomeLOL], keyAPIlol);     
+                ApiController.getElo(idUser,keyAPIlol).then(infoUser => msg.reply
+                    (`${infoUser.summonerName} Seu elo 
+                    (${infoUser.tier} ${infoUser.rank}), Partidas: W:${infoUser.wins} L:${infoUser.losses}`))        
+            
+            }
+            else{
+                msg.reply("Favor Colocar o seu nome do LOL!")
+            }
         }
     }
 })
 
 
-Client.login("TOKEN BOT")
+Client.login("NzMwODYyNTAxMDQyMDYxMzY0.XwpWrA.4Usuaxw0vW9jVR2u1sK1mX7bWVc")

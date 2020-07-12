@@ -6,7 +6,7 @@ module.exports = {
       uri:`https://br1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${userName}?api_key=${apiKey}`,
       json: true 
     }
-
+    console.log(userName)
     const idUser = await rp(api);
     return idUser.id;
   },
