@@ -1,25 +1,48 @@
 const rp = require('request-promise-native')
 
 module.exports = {
+  
   async getUserId(userName,apiKey){
-    const api = {
+    
+    const apiSummoner = {
       uri:`https://br1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${userName}?api_key=${apiKey}`,
       json: true 
     }
-    console.log(userName)
-    const idUser = await rp(api);
-    return idUser.id;
+
+    const getIdUser = await rp(apiSummoner)
+      .then(idUser => {
+        return idUser.id
+      })
+      .catch(erroApi => {
+        console.log(erroApi.message)
+      })
+    
+    return getIdUser
   },
 
-  async getElo(idUser,apiKey){
-  
-    const api = {
+  async getEloSolo(idUser,apiKey){
+    
+    const apiLeague = {
       uri:`https://br1.api.riotgames.com/lol/league/v4/entries/by-summoner/${await idUser}?api_key=${apiKey}`,
       json: true 
     }
     
-    const infoUser = await rp(api);
-    
-    return infoUser[0];
-  }
+    const infoUser = await rp(apiLeague)
+      .then(getRank => {
+        for(let contador = 0; contador < getRank.length; contador++){
+          if(getRank[contador].queueType == 'RANKED_SOLO_5x5'){
+            return getRank[contador]
+          }
+        }
+      })
+      .catch(err => {
+        console.log(err.message)
+      })
+  
+    return infoUser;
+  },
+
+
+
+
 }
