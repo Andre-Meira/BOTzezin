@@ -1,7 +1,8 @@
 const Discord = require("discord.js");
 const Client = new Discord.Client();
 const ApiController = require('./Controllers/Api');
-const keyAPIlol = "API LOL"
+const { getEloSolo } = require("./Controllers/Api");
+const keyAPIlol = "RGAPI-d026d8c3-2d01-4960-b7bf-d136ae81f95e"
 
 
 Client.on("ready",()=>{
@@ -23,13 +24,13 @@ Client.on("message",(msg) => {
         
         if(msg.content.startsWith("-rankLOL")) {   
             
-            const IndexNomeLOL = 1;
-            const nameUser = msg.content.split("-rankLOL");
+            const getNomeLOL = 1;
+            const nameUser = msg.content.split("-rankLOL ");
             
-            if(nameUser[IndexNomeLOL]) {    
+            if(nameUser[getNomeLOL]) {    
+        
+                const idUser = ApiController.getUserId(nameUser[getNomeLOL], keyAPIlol)
 
-                const idUser = ApiController.getUserId(nameUser[IndexNomeLOL], keyAPIlol)
-                
                 ApiController.getEloSolo(idUser, keyAPIlol)
                     .then(infoRank => {
                         if(infoRank == undefined){
@@ -44,8 +45,31 @@ Client.on("message",(msg) => {
                 msg.reply("Favor Colocar o seu nome do LOL!");
             }
         }
+
+        if(msg.content.startsWith("-mainLOL")){
+            const getNomeLOL = 1;
+            const nameUser = msg.content.split("-mainLOL ");
+            
+            if(nameUser[getNomeLOL]){
+                
+                const idUser = ApiController.getUserId(nameUser[getNomeLOL], keyAPIlol)
+                ApiController.getChampionMain(idUser, keyAPIlol).then(infoChamp => {
+                    msg.reply(
+                        `${nameUser[getNomeLOL]} Champion Name:(${infoChamp["namesChamp"][1]}) Level Maestria: (${infoChamp["infoChamp"][0]["championLevel"]}) Pontos de Maestria:(${infoChamp["infoChamp"][0]["championPoints"]}) \\
+                         Champion Name: (${infoChamp["namesChamp"][1]}) Level Maestria: (${infoChamp["infoChamp"][1]["championLevel"]}) Pontos de Maestria:(${infoChamp["infoChamp"][1]["championPoints"]}) \\
+                         Champion Name: (${infoChamp["namesChamp"][2]}) Level Maestria: (${infoChamp["infoChamp"][2]["championLevel"]}) Pontos de Maestria:(${infoChamp["infoChamp"][2]["championPoints"]})`
+                        )
+                })
+
+            }
+            else{
+                msg.reply("Favor Colocar o seu nome do LOL!")
+            }
+        
+        }
+
     }
 })
 
 
-Client.login("TOKEN-BOT")
+Client.login("NzMwODYyNTAxMDQyMDYxMzY0.XxGVWA.j5r9slpah68ZBHHrY7i37JGzE0k")

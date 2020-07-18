@@ -1,4 +1,6 @@
 const rp = require('request-promise-native')
+const  {returnNameChamp}  = require('../namesChampId')
+
 
 module.exports = {
   
@@ -42,7 +44,29 @@ module.exports = {
     return infoUser;
   },
 
+  async getChampionMain(idUser,apiKey){
+    
+    const listChamp1 = 0;
+    const listChamp2 = 1;
+    const listChamp3 = 2;
 
+    const apiChampMaster = {
+      uri:`https://br1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/${await idUser}?api_key=${apiKey}`,
+      json:true
+    }
 
+    const userChampsMains = await rp(apiChampMaster)
+      .then(getMain => { 
+        return getMain.splice(0,3)
+      })
+      
+    const getNameChamp = await returnNameChamp([userChampsMains[listChamp1]["championId"],userChampsMains[listChamp2]["championId"],userChampsMains[listChamp3]["championId"]])
+      .then(nameOfChamp => {
+        return nameOfChamp.nameChamp
+      })
+     
+      
+    return {infoChamp:userChampsMains, namesChamp:getNameChamp}
 
+    }
 }
