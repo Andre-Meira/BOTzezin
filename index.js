@@ -1,8 +1,7 @@
 const Discord = require("discord.js");
 const Client = new Discord.Client();
 const ApiController = require('./Controllers/Api');
-const { getEloSolo } = require("./Controllers/Api");
-const keyAPIlol = "RGAPI-d026d8c3-2d01-4960-b7bf-d136ae81f95e"
+const keyAPIlol = "API LOL"
 
 
 Client.on("ready",()=>{
@@ -72,4 +71,4 @@ Client.on("message",(msg) => {
 })
 
 
-Client.login("NzMwODYyNTAxMDQyMDYxMzY0.XxGVWA.j5r9slpah68ZBHHrY7i37JGzE0k")
+Client.login("TOKEN BOT")
